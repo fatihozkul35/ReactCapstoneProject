@@ -3,6 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import PrivateRouter from "./PrivateRouter";
 import Home from "../pages/Home/Home";
 import Navbar from "../components/Navbar/Navbar";
+import Login from "../pages/Login/Login";
+import Register from "../pages/Register/Register";
 const AppRouter = () => {
   return (
     <div>
@@ -20,8 +22,8 @@ const AppRouter = () => {
         <Route path="" element={<Details />} />
       </Route> */}
 
-        {/* <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} /> */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );
