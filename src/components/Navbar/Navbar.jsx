@@ -9,33 +9,27 @@ import {
   Switch,
   Toolbar,
   Typography,
-  // IconButtonProps,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import React, { useState } from "react";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-// import { FaRegHandPeace } from "react-icons/fa";
-// import { navbar } from "./navbarStyles";
-// import { ExpandMore } from "@mui/icons-material";
 
 const Navbar = () => {
-  //! functions of navbar
-  // const [auth, setAuth] = useState(true);
-  // const [anchorEl, setAnchorEl] = useState(null);
-  // (React.useState < null) | (HTMLElement > null);
+  const [auth, setAuth] = useState(true);
+  const [anchorEl, setAnchorEl] = useState(null);
 
-  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setAuth(event.target.checked);
-  // };
+  const handleChange = (e) => {
+    setAuth(e.target.checked);
+  };
 
-  // const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
+  const handleMenu = (e) => {
+    setAnchorEl(e);
+  };
 
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -43,12 +37,12 @@ const Navbar = () => {
         <FormControlLabel
           control={
             <Switch
-              // checked={auth}
-              // onChange={handleChange}
+              checked={auth}
+              onChange={handleChange}
               aria-label="login switch"
             />
           }
-          // label={auth ? "Logout" : "Login"}
+          label={auth ? "Logout" : "Login"}
         />
       </FormGroup>
       <AppBar position="static">
@@ -65,46 +59,38 @@ const Navbar = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Photos
           </Typography>
-          {/* {auth && ( */}
-          <div>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              // onClick={handleMenu}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              // anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              // open={Boolean(anchorEl)}
-              // onClose={handleClose}
-            >
-              <MenuItem
-              // onClick={handleClose}
+          {auth && (
+            <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
               >
-                Profile
-              </MenuItem>
-              <MenuItem
-              // onClick={handleClose}
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
               >
-                My account
-              </MenuItem>
-            </Menu>
-          </div>
-          {/* )} */}
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
+              </Menu>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
     </Box>

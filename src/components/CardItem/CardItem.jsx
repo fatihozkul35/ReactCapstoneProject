@@ -13,9 +13,27 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { ExpandMore } from "@mui/icons-material";
+import { useState } from "react";
 
+export interface ExpandMoreProps extends IconButtonProps {
+  expand: boolean;
+}
+
+const ExpandMore = styled((props: ExpandMoreProps) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
 const CardItem = () => {
+  const [expanded, setExpanded] = useState(false);
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
   return (
     <div>
       <Card sx={{ maxWidth: 345 }}>
@@ -54,19 +72,15 @@ const CardItem = () => {
             <ShareIcon />
           </IconButton>
           <ExpandMore
-            // expand={expanded}
-            // onClick={handleExpandClick}
-            // aria-expanded={expanded}
+            expand={expanded}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
             aria-label="show more"
           >
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>
-        <Collapse
-          // in={expanded}
-          timeout="auto"
-          unmountOnExit
-        >
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>Method:</Typography>
             <Typography paragraph>
