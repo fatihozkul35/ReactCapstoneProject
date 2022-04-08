@@ -1,15 +1,15 @@
 import { AUTH_LOGIN, AUTH_LOGOUT } from "../types/authTypes";
 
 const initialState = {
-  auth: false,
+  currentUser: false,
 };
 
 const authReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case AUTH_LOGIN:
-      return { auth: true };
+      return { currentUser: payload };
     case AUTH_LOGOUT:
-      return { auth: false };
+      return { currentUser: false };
     default:
       return state;
   }

@@ -3,8 +3,13 @@ import { Box, Button, Grid, TextField } from "@mui/material";
 import React from "react";
 import { registerFormContainer } from "../../components/RegisterForm/registerFormStyles";
 import SendIcon from "@mui/icons-material/Send";
+import { signInWithGoogle } from "../../utils/functions";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <div>
       <h1>Login</h1>
@@ -54,6 +59,19 @@ const Login = () => {
               fullWidth
             >
               Login
+            </Button>
+          </Grid>
+          <Grid item xs={12}>
+            <Button
+              variant="contained"
+              endIcon={<SendIcon />}
+              fullWidth
+              onClick={() => {
+                signInWithGoogle(dispatch);
+                navigate("/");
+              }}
+            >
+              Sign in with Google
             </Button>
           </Grid>
         </Grid>

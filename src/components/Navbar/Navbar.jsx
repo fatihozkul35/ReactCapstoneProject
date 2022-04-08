@@ -17,12 +17,13 @@ import React, { useState } from "react";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useSelector } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import { signOut } from "../../utils/functions";
 
 const Navbar = () => {
   // const [auth, setAuth] = useState(false);
   const navigate = useNavigate();
 
-  const { auth } = useSelector((state) => state.auth);
+  const { currentUser } = useSelector((state) => state.auth);
   const [anchorEl, setAnchorEl] = useState();
   // (React.useState < null) | (HTMLElement > null);
 
@@ -78,6 +79,8 @@ const Navbar = () => {
               onClick={handleMenu}
               color="inherit"
             >
+              {currentUser.displayName}
+              {"  "}
               <AccountCircle />
             </IconButton>
             <Menu
@@ -95,7 +98,7 @@ const Navbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              {!auth && (
+              {!currentUser && (
                 <div>
                   <MenuItem
                     onClick={() => {
@@ -116,7 +119,7 @@ const Navbar = () => {
                   </MenuItem>
                 </div>
               )}
-              {auth && (
+              {currentUser && (
                 <div>
                   <MenuItem
                     onClick={() => {
@@ -137,6 +140,7 @@ const Navbar = () => {
                   </MenuItem>
                   <MenuItem
                     onClick={() => {
+                      signOut();
                       handleClose();
                       navigate("/");
                     }}
