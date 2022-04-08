@@ -1,7 +1,7 @@
 import { AUTH_LOGIN, AUTH_LOGOUT } from "../types/authTypes";
 
 const initialState = {
-  auth: true,
+  auth: false,
 };
 
 const authReducer = (state = initialState, { type, payload }) => {

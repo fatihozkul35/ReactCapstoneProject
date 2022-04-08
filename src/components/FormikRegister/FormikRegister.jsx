@@ -1,7 +1,8 @@
 import React from "react";
-import LoginForm from "../LoginForm/LoginForm";
+import RegisterForm from "../RegisterForm/RegisterForm";
 import { FormikValidationSchema } from "./FormikValidationSchema";
-const Formik = () => {
+import { Formik } from "formik";
+const FormikRegister = () => {
   return (
     <div>
       <Formik
@@ -18,10 +19,10 @@ const Formik = () => {
           actions.resetForm();
           actions.setSubmitting(false);
         }}
-        // component={(props) => <LoginForm {...props} />}
+        component={(props) => <RegisterForm {...props} />}
       ></Formik>
     </div>
   );
 };
 
-export default Formik;
+export default FormikRegister;
