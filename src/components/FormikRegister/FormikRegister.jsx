@@ -16,6 +16,7 @@ const FormikRegister = () => {
           alert(`email: ${values.email}
              password: ${values.password}
             `);
+          console.log(values.email, values.password);
           actions.resetForm();
           actions.setSubmitting(false);
         }}

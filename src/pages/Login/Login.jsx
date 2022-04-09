@@ -1,21 +1,40 @@
 import { Box, Button, Grid, TextField } from "@mui/material";
 // import { Form } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { registerFormContainer } from "../../components/RegisterForm/registerFormStyles";
 import SendIcon from "@mui/icons-material/Send";
-import { signInWithGoogle } from "../../utils/functions";
+import { logInWithGoogle } from "../../utils/functions";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { logInWithEmailAndPassword } from "../../utils/functions";
 
+const initialValuesOfForm = { email: "", password: "" };
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [loginForm, setLoginForm] = useState(initialValuesOfForm);
+
+  const changeForm = (e) => {
+    setLoginForm({ ...loginForm, [e.target.id]: e.target.value });
+  };
+
+  const handleLogIn = (e) => {
+    e.preventDefault();
+    logInWithEmailAndPassword(
+      loginForm.email,
+      loginForm.password,
+      dispatch,
+      navigate
+    );
+  };
   return (
     <div>
       <h1>Login</h1>
       <Box
-        // component="form"
+        component="form"
         style={registerFormContainer}
+        onSubmit={handleLogIn}
         // noValidate
         // autoComplete="off"
       >
@@ -34,6 +53,7 @@ const Login = () => {
               // helperText={touched.email && errors.email}
               // error={touched.email && Boolean(errors.email)}
               fullWidth
+              onChange={changeForm}
             />
           </Grid>
           <Grid item xs={12}>
@@ -49,6 +69,7 @@ const Login = () => {
               // helperText={touched.password && errors.password}
               // error={touched.password && Boolean(errors.password)}
               fullWidth
+              onChange={changeForm}
             />
           </Grid>
           <Grid item xs={12}>
@@ -67,8 +88,7 @@ const Login = () => {
               endIcon={<SendIcon />}
               fullWidth
               onClick={() => {
-                signInWithGoogle(dispatch);
-                navigate("/");
+                logInWithGoogle(dispatch, navigate);
               }}
             >
               Sign in with Google

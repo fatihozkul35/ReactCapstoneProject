@@ -3,14 +3,23 @@ import React from "react";
 import { registerFormContainer } from "./registerFormStyles";
 import SendIcon from "@mui/icons-material/Send";
 import { Form } from "formik";
+import { registerWithEmailPassword } from "../../utils/functions";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 const RegisterForm = (props) => {
+  const dispatch = useDispatch();
   const { values, handleChange, handleBlur, touched, errors } = props;
+  const handleSubmit = () => {
+    console.log("register submit");
+    registerWithEmailPassword(values.email, values.password, dispatch);
+  };
   return (
     <Form
-      // component="form"
+      component="form"
       style={registerFormContainer}
       // noValidate
       // autoComplete="off"
+      onSubmit={handleSubmit}
     >
       <Grid container style={{ width: "50%" }} spacing={4}>
         <Grid item xs={12}>
@@ -53,6 +62,9 @@ const RegisterForm = (props) => {
           >
             Register
           </Button>
+        </Grid>
+        <Grid item xs={12}>
+          <Link to="/login">Sie haben bereits ein Konto?</Link>
         </Grid>
       </Grid>
     </Form>

@@ -1,27 +1,24 @@
 import {
   AppBar,
   Box,
-  FormControlLabel,
-  FormGroup,
   IconButton,
   Menu,
   MenuItem,
-  Switch,
   Toolbar,
   Typography,
 } from "@mui/material";
 
-import MenuIcon from "@mui/icons-material/Menu";
 import { FaRegHandPeace } from "react-icons/fa";
 import React, { useState } from "react";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import { useSelector } from "react-redux";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { signOut } from "../../utils/functions";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logOut } from "../../utils/functions";
 
 const Navbar = () => {
   // const [auth, setAuth] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { currentUser } = useSelector((state) => state.auth);
   const [anchorEl, setAnchorEl] = useState();
@@ -62,6 +59,7 @@ const Navbar = () => {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={() => navigate("/")}
           >
             {/* <MenuIcon /> */}
             <FaRegHandPeace />
@@ -80,7 +78,7 @@ const Navbar = () => {
               color="inherit"
             >
               {currentUser.displayName}
-              {"  "}
+
               <AccountCircle />
             </IconButton>
             <Menu
@@ -140,9 +138,8 @@ const Navbar = () => {
                   </MenuItem>
                   <MenuItem
                     onClick={() => {
-                      signOut();
+                      logOut(dispatch, navigate);
                       handleClose();
-                      navigate("/");
                     }}
                   >
                     Logout
