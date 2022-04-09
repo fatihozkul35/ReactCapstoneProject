@@ -4,16 +4,17 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
+// import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { useState } from "react";
+// import ShareIcon from "@mui/icons-material/Share";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+// import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+// import MoreVertIcon from "@mui/icons-material/MoreVert";
+// import { useState } from "react";
 
 // export interface ExpandMoreProps extends IconButtonProps {
 //   expand: boolean;
@@ -47,10 +48,10 @@ const ExpandMore = styled((props) => {
 }));
 const CardItem = (prop) => {
   const { title, date, img, description } = prop.blog;
-  const [expanded, setExpanded] = useState(false);
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  // const [expanded, setExpanded] = useState(false);
+  // const handleExpandClick = () => {
+  //   setExpanded(!expanded);
+  // };
   return (
     <div>
       <Card sx={{ maxWidth: 345 }}>
@@ -60,11 +61,11 @@ const CardItem = (prop) => {
               S
             </Avatar>
           }
-          action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          }
+          // action={
+          //   <IconButton aria-label="settings">
+          //     <MoreVertIcon />
+          //   </IconButton>
+          // }
           title={title}
           subheader={date}
         />
@@ -85,18 +86,19 @@ const CardItem = (prop) => {
             <FavoriteIcon />
           </IconButton>
           <IconButton aria-label="share">
-            <ShareIcon />
+            {/* <ShareIcon /> */}
+            <ChatBubbleOutlineIcon />
           </IconButton>
-          <ExpandMore
+          {/* <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
             aria-expanded={expanded}
             aria-label="show more"
           >
             <ExpandMoreIcon />
-          </ExpandMore>
+          </ExpandMore> */}
         </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>Method:</Typography>
             <Typography paragraph>
@@ -127,7 +129,7 @@ const CardItem = (prop) => {
               serve.
             </Typography>
           </CardContent>
-        </Collapse>
+        </Collapse> */}
       </Card>
     </div>
   );

@@ -2,26 +2,36 @@ import { Box, Button, Grid, TextField } from "@mui/material";
 import React, { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import { registerFormContainer } from "../../components/RegisterForm/registerFormStyles";
-import { blogToFirebase } from "../../utils/databaseFunctions";
+import { createBlogToFirebase } from "../../utils/databaseFunctions";
+import { useSelector } from "react-redux";
 
 const initialValuesOfNewBlog = {
+  id: 0,
   title: "",
   date: "",
   img: "",
   description: "",
+  whoCreated: "",
 };
 
 const NewBlog = () => {
   const [newBlog, setNewBlog] = useState(initialValuesOfNewBlog);
+  // const { currentUser } = useSelector((state) => state.auth);
 
   const changeBlog = (e) => {
     setNewBlog({ ...newBlog, [e.target.id]: e.target.value });
   };
   const newBlogsubmitToFirebase = (e) => {
     e.preventDefault();
-    blogToFirebase(newBlog);
+    // setNewBlog({
+    //   ...newBlog,
+    //   id: newBlog.id + 1,
+    //   whoCreated: currentUser.email,
+    // });
+    createBlogToFirebase(newBlog);
     setNewBlog(initialValuesOfNewBlog);
   };
+
   return (
     <div>
       <h1>New Blog</h1>
