@@ -3,10 +3,10 @@ import { Box, Button, Grid, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { registerFormContainer } from "../../components/RegisterForm/registerFormStyles";
 import SendIcon from "@mui/icons-material/Send";
-import { logInWithGoogle } from "../../utils/functions";
+import { logInWithGoogle } from "../../utils/loginAndLogoutfunctions";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logInWithEmailAndPassword } from "../../utils/functions";
+import { logInWithEmailAndPassword } from "../../utils/loginAndLogoutfunctions";
 
 const initialValuesOfForm = { email: "", password: "" };
 const Login = () => {

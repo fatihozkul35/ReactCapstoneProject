@@ -8,6 +8,7 @@ import {
 import { auth, provider } from "../auth/firebase";
 import { authLogin, authLogout } from "../redux/actions/authActions";
 
+//! LOGIN AND LOGOUT FUNCTIONS
 export const logInWithGoogle = (dispatch, navigate) => {
   signInWithPopup(auth, provider)
     .then((result) => {

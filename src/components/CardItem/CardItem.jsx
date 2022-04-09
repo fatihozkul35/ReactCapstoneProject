@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
-import IconButton, { IconButtonProps } from "@mui/material/IconButton";
+import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -15,11 +15,27 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
 
-export interface ExpandMoreProps extends IconButtonProps {
-  expand: boolean;
-}
+// export interface ExpandMoreProps extends IconButtonProps {
+//   expand: boolean;
+// }
+// const blogs = [
+//   {
+//     title: "Shrimp and Chorizo Paella",
+//     date: "September 14, 2016",
+//     img: "https://cdn.pixabay.com/photo/2022/01/22/16/26/lake-6957802_960_720.jpg",
+//     description:
+//       "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
+//   },
+//   {
+//     title: "Shrimp and Chorizo Paella",
+//     date: "September 14, 2016",
+//     img: "https://cdn.pixabay.com/photo/2022/01/22/16/26/lake-6957802_960_720.jpg",
+//     description:
+//       "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
+//   },
+// ];
 
-const ExpandMore = styled((props: ExpandMoreProps) => {
+const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
@@ -29,7 +45,8 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
     duration: theme.transitions.duration.shortest,
   }),
 }));
-const CardItem = () => {
+const CardItem = (prop) => {
+  const { title, date, img, description } = prop.blog;
   const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -40,7 +57,7 @@ const CardItem = () => {
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              R
+              S
             </Avatar>
           }
           action={
@@ -48,20 +65,19 @@ const CardItem = () => {
               <MoreVertIcon />
             </IconButton>
           }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
+          title={title}
+          subheader={date}
         />
         <CardMedia
           component="img"
           height="194"
-          image="/static/images/cards/paella.jpg"
+          // image={reactImg}
+          image={img}
           alt="Paella dish"
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests. Add 1 cup of frozen peas along with
-            the mussels, if you like.
+            {description}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>

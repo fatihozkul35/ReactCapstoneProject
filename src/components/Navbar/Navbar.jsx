@@ -13,7 +13,7 @@ import React, { useState } from "react";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logOut } from "../../utils/functions";
+import { logOut } from "../../utils/loginAndLogoutfunctions";
 
 const Navbar = () => {
   // const [auth, setAuth] = useState(false);
