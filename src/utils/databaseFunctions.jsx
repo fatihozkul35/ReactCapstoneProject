@@ -2,15 +2,9 @@ import { getDatabase, onValue, ref, set } from "firebase/database";
 
 //! This function saves a new blog to firebase
 export const createBlogToFirebase = (blog) => {
-  const { id, title, date, img, description, whoCreated } = blog;
+  console.log(blog);
   const db = getDatabase();
-  set(ref(db, "blogs/" + id), {
-    title: title,
-    date: date,
-    img: img,
-    description: description,
-    whoCreated: whoCreated,
-  });
+  set(ref(db, "blogs/" + blog.id), blog);
 };
 
 //! This function fetch blogs from firebase

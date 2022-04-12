@@ -16,7 +16,7 @@ export const logInWithGoogle = (dispatch, navigate) => {
       //! const credential = GoogleAuthProvider.credentialFromResult(result);
       //! const token = credential.accessToken;
       // The signed-in user info.
-      const currentUser = result.user.auth.currentUser;
+      const currentUser = result.user;
       dispatch(authLogin(currentUser));
       navigate("/");
     })
@@ -82,7 +82,6 @@ export const logOut = (dispatch, navigate) => {
     })
     .catch((error) => {
       // An error happened.
-      console.log(error);
-      console.log("An error happened.");
+      alert(error);
     });
 };

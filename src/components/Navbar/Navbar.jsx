@@ -14,6 +14,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logOut } from "../../utils/loginAndLogoutfunctions";
+import { MenuItemHover, navbar } from "./navbarStyles";
 
 const Navbar = () => {
   // const [auth, setAuth] = useState(false);
@@ -27,7 +28,7 @@ const Navbar = () => {
   // const handleChange = (e) => {
   //   setAuth(e.target.checked);
   // };
-
+  console.log(currentUser);
   const handleMenu = (e) => {
     setAnchorEl(e.currentTarget);
   };
@@ -38,7 +39,7 @@ const Navbar = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box style={navbar} sx={{ flexGrow: 1 }}>
       {/* <FormGroup>
         <FormControlLabel
           control={
@@ -64,8 +65,17 @@ const Navbar = () => {
             {/* <MenuIcon /> */}
             <FaRegHandPeace />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            CapstoneProject
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{
+              flexGrow: 1,
+              fontFamily: "inherit",
+              fontSize: "2rem",
+              color: "#19402E",
+            }}
+          >
+            Welcome to our website {currentUser.displayName}
           </Typography>
 
           <div>
@@ -77,11 +87,10 @@ const Navbar = () => {
               onClick={handleMenu}
               color="inherit"
             >
-              {currentUser.displayName}
-
               <AccountCircle />
             </IconButton>
             <Menu
+              sx={{ fontFamily: "inherit" }}
               id="menu-appbar"
               anchorEl={anchorEl}
               anchorOrigin={{
@@ -97,53 +106,61 @@ const Navbar = () => {
               onClose={handleClose}
             >
               {!currentUser && (
-                <div>
-                  <MenuItem
-                    onClick={() => {
-                      handleClose();
-                      navigate("/login");
-                    }}
-                  >
-                    Login
-                  </MenuItem>
-
-                  <MenuItem
-                    onClick={() => {
-                      handleClose();
-                      navigate("/register");
-                    }}
-                  >
-                    Register
-                  </MenuItem>
+                <div sx={{ fontFamily: "inherit" }}>
+                  <MenuItemHover>
+                    <MenuItem
+                      onClick={() => {
+                        handleClose();
+                        navigate("/login");
+                      }}
+                    >
+                      Login
+                    </MenuItem>
+                  </MenuItemHover>
+                  <MenuItemHover>
+                    <MenuItem
+                      onClick={() => {
+                        handleClose();
+                        navigate("/register");
+                      }}
+                    >
+                      Register
+                    </MenuItem>
+                  </MenuItemHover>
                 </div>
               )}
               {currentUser && (
                 <div>
-                  <MenuItem
-                    onClick={() => {
-                      handleClose();
-                      navigate("/profile");
-                    }}
-                  >
-                    Profile
-                  </MenuItem>
-
-                  <MenuItem
-                    onClick={() => {
-                      handleClose();
-                      navigate("/newBlog");
-                    }}
-                  >
-                    New Blog
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => {
-                      logOut(dispatch, navigate);
-                      handleClose();
-                    }}
-                  >
-                    Logout
-                  </MenuItem>
+                  <MenuItemHover>
+                    <MenuItem
+                      onClick={() => {
+                        handleClose();
+                        navigate("/profile");
+                      }}
+                    >
+                      Profile
+                    </MenuItem>
+                  </MenuItemHover>
+                  <MenuItemHover>
+                    <MenuItem
+                      onClick={() => {
+                        handleClose();
+                        navigate("/newBlog");
+                      }}
+                    >
+                      New Blog
+                    </MenuItem>
+                  </MenuItemHover>
+                  <MenuItemHover>
+                    <MenuItem
+                      onClick={() => {
+                        logOut(dispatch, navigate);
+                        handleClose();
+                      }}
+                    >
+                      Logout
+                    </MenuItem>
+                  </MenuItemHover>
                 </div>
               )}
             </Menu>

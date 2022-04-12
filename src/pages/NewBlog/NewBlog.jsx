@@ -6,30 +6,40 @@ import { createBlogToFirebase } from "../../utils/databaseFunctions";
 import { useSelector } from "react-redux";
 
 const initialValuesOfNewBlog = {
-  id: 0,
+  id: "",
   title: "",
   date: "",
   img: "",
   description: "",
   whoCreated: "",
+  whoLiked: ["a", "b", "c"],
+  likedCounter: 0,
+  // whoCommented: {},
 };
 
 const NewBlog = () => {
-  const [newBlog, setNewBlog] = useState(initialValuesOfNewBlog);
-  // const { currentUser } = useSelector((state) => state.auth);
+  const [blogForm, setBlogForm] = useState(initialValuesOfNewBlog);
+  const { currentUser } = useSelector((state) => state.auth);
 
   const changeBlog = (e) => {
-    setNewBlog({ ...newBlog, [e.target.id]: e.target.value });
+    setBlogForm({ ...blogForm, [e.target.name]: e.target.value });
   };
+
   const newBlogsubmitToFirebase = (e) => {
     e.preventDefault();
-    // setNewBlog({
-    //   ...newBlog,
-    //   id: newBlog.id + 1,
-    //   whoCreated: currentUser.email,
-    // });
+    const id = Date.now();
+    // const date = `${new Date().getDate()}+ ${new Date().getMonth()} +${new Date().getYear()}`; //!ayar cekilecek...
+    const date = new Date().getTime();
+    const whoCreated = currentUser.email;
+    const newBlog = {
+      ...blogForm,
+      id: id,
+      whoCreated: whoCreated,
+      date: date,
+    };
+    console.log(newBlog);
     createBlogToFirebase(newBlog);
-    setNewBlog(initialValuesOfNewBlog);
+    setBlogForm(initialValuesOfNewBlog);
   };
 
   return (
@@ -46,10 +56,11 @@ const NewBlog = () => {
           <Grid item xs={12}>
             <TextField
               id="title"
+              name="title"
               label="Title"
               type="text"
               variant="filled"
-              value={newBlog.title}
+              value={blogForm.title}
               // onChange={handleChange}
               // onBlur={handleBlur}
               // helperText={touched.email && errors.email}
@@ -63,10 +74,11 @@ const NewBlog = () => {
             <TextField
               // id="filled-search"
               id="img"
+              name="img"
               label="Image URL"
               type="url"
               variant="filled"
-              value={newBlog.img}
+              value={blogForm.img}
               // onChange={handleChange}
               // onBlur={handleBlur}
               // helperText={touched.password && errors.password}
@@ -80,10 +92,11 @@ const NewBlog = () => {
             <TextField
               // id="filled-search"
               id="description"
+              name="description"
               label="Content"
               type="text"
               variant="filled"
-              value={newBlog.description}
+              value={blogForm.description}
               // onChange={handleChange}
               // onBlur={handleBlur}
               // helperText={touched.password && errors.password}

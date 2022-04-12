@@ -10,7 +10,6 @@ const RegisterForm = (props) => {
   const dispatch = useDispatch();
   const { values, handleChange, handleBlur, touched, errors } = props;
   const handleSubmitRegister = () => {
-    console.log("register submit");
     registerWithEmailPassword(values.email, values.password, dispatch);
   };
   return (

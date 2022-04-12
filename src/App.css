@@ -1,5 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Grape+Nuts&family=Indie+Flower&family=Lobster&family=Pacifico&family=Permanent+Marker&family=Rubik+Moonrocks&family=Rubik+Wet+Paint&display=swap");
+
 .App {
   text-align: center;
+  font-family: "Indie Flower", cursive;
 }
 
 .App-logo {
