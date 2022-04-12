@@ -1,8 +1,15 @@
-import { getDatabase, onValue, ref, set } from "firebase/database";
+import {
+  child,
+  getDatabase,
+  onValue,
+  push,
+  ref,
+  set,
+  update,
+} from "firebase/database";
 
 //! This function saves a new blog to firebase
 export const createBlogToFirebase = (blog) => {
-  console.log(blog);
   const db = getDatabase();
   set(ref(db, "blogs/" + blog.id), blog);
 };
@@ -13,8 +20,29 @@ export const getblogsFromFirebase = (setBlogs) => {
   const starCountRef = ref(db, "blogs/");
   onValue(starCountRef, (snapshot) => {
     const data = snapshot.val();
-    const arrayData = Object.values(data);
+    if (data) {
+      const arrayData = Object.values(data);
+      setBlogs([...arrayData]);
+    } else {
+      setBlogs([]);
+    }
     // console.log(arrayData);
-    setBlogs([...arrayData]);
   });
 };
+// !! Update Function
+// export const updateBlogToFirebase = (id, blog) => {
+//   const db = getDatabase();
+
+//   // A post entry.
+//   const updateBlog = blog;
+
+//   // Get a key for a new Post.
+//   const newPostKey = push(child(ref(db), "blogs")).key;
+
+//   // Write the new post's data simultaneously in the posts list and the user's post list.
+//   const updates = {};
+//   updates["/blogs/" + newPostKey] = updateBlog;
+//   updates["/blogs/" + id + "/" + blog.id] = updateBlog;
+
+//   return update(ref(db), updates);
+// };

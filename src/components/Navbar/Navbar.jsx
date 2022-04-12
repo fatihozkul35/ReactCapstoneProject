@@ -28,7 +28,6 @@ const Navbar = () => {
   // const handleChange = (e) => {
   //   setAuth(e.target.checked);
   // };
-  console.log(currentUser);
   const handleMenu = (e) => {
     setAnchorEl(e.currentTarget);
   };
@@ -106,7 +105,7 @@ const Navbar = () => {
               onClose={handleClose}
             >
               {!currentUser && (
-                <div sx={{ fontFamily: "inherit" }}>
+                <div>
                   <MenuItemHover>
                     <MenuItem
                       onClick={() => {

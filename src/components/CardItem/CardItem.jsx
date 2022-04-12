@@ -11,6 +11,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import { CardActionArea } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // const blogs = [
 //   {
@@ -30,8 +31,9 @@ import { useNavigate } from "react-router-dom";
 // ];
 
 const CardItem = (prop) => {
-  const { title, date, img, description } = prop.blog;
+  const { id, title, date, img, description, whoCreated } = prop.blog;
   const navigate = useNavigate();
+  // const { currentUser } = useSelector((state) => state.auth);
 
   return (
     <div>
@@ -39,13 +41,15 @@ const CardItem = (prop) => {
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              S
+              {whoCreated.charAt(0).toUpperCase()}
             </Avatar>
           }
           title={title}
           subheader={date}
         />
-        <CardActionArea onClick={() => navigate(`/${title}`)}>
+        <CardActionArea
+          onClick={() => navigate(`/${id}`, { state: prop.blog })}
+        >
           <CardMedia
             component="img"
             height="194"

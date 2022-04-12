@@ -14,5 +14,6 @@ export const navbar = {
 export const MenuItemHover = styled.div`
   &:hover {
     color: #04d0f5;
+    backgroundcolor: "red";
   }
 `;
