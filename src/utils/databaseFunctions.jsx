@@ -4,14 +4,16 @@ import {
   onValue,
   push,
   ref,
+  remove,
   set,
   update,
 } from "firebase/database";
 
 //! This function saves a new blog to firebase
 export const createBlogToFirebase = (blog) => {
+  const id = Date.now();
   const db = getDatabase();
-  set(ref(db, "blogs/" + blog.id), blog);
+  set(ref(db, "blogs/" + id), { ...blog, id: id });
 };
 
 //! This function fetch blogs from firebase
@@ -29,20 +31,18 @@ export const getblogsFromFirebase = (setBlogs) => {
     // console.log(arrayData);
   });
 };
-// !! Update Function
-// export const updateBlogToFirebase = (id, blog) => {
-//   const db = getDatabase();
+// !! This function updates blogs to firebase
+export const updateBlogToFirebase = (blog) => {
+  const db = getDatabase();
+  const id = blog.id;
+  const updateBlog = blog;
+  const updates = {};
+  updates["/blogs/" + id] = updateBlog;
+  return update(ref(db), updates);
+};
 
-//   // A post entry.
-//   const updateBlog = blog;
-
-//   // Get a key for a new Post.
-//   const newPostKey = push(child(ref(db), "blogs")).key;
-
-//   // Write the new post's data simultaneously in the posts list and the user's post list.
-//   const updates = {};
-//   updates["/blogs/" + newPostKey] = updateBlog;
-//   updates["/blogs/" + id + "/" + blog.id] = updateBlog;
-
-//   return update(ref(db), updates);
-// };
+export const deleteBlog = (id) => {
+  const db = getDatabase();
+  remove(ref(db, "blogs/" + id));
+  // successNote("Deleted");
+};

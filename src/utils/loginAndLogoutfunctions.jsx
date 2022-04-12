@@ -76,7 +76,6 @@ export const logOut = (dispatch, navigate) => {
   signOut(auth)
     .then(() => {
       // Sign-out successful.
-      console.log("Sign-out successful.");
       dispatch(authLogout());
       navigate("/");
     })

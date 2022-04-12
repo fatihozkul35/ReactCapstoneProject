@@ -5,9 +5,10 @@ import { registerFormContainer } from "../RegisterForm/registerFormStyles";
 import { createBlogToFirebase } from "../../utils/databaseFunctions";
 import { useSelector } from "react-redux";
 
-const Blog = ({ state }) => {
+const Blog = ({ state, stateFunction }) => {
   const [blogForm, setBlogForm] = useState(state);
   const { currentUser } = useSelector((state) => state.auth);
+
   const changeBlog = (e) => {
     setBlogForm({ ...blogForm, [e.target.name]: e.target.value });
   };
@@ -15,7 +16,7 @@ const Blog = ({ state }) => {
   const newBlogsubmitToFirebase = (e) => {
     e.preventDefault();
     // const id = Date.now();
-    // const date = `${new Date().getDate()}+ ${new Date().getMonth()} +${new Date().getYear()}`; //!ayar cekilecek...
+
     const dat = new Date();
     const date = [
       dat.getDate(),
@@ -29,9 +30,8 @@ const Blog = ({ state }) => {
       whoCreated: whoCreated,
       date: date,
     };
-    createBlogToFirebase(newBlog);
+    stateFunction(newBlog);
     setBlogForm({
-      id: "",
       title: "",
       date: "",
       img: "",

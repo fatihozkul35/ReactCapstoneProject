@@ -21,12 +21,13 @@ import { red } from "@mui/material/colors";
 import { cardItemDetailsContainer } from "./cardItemDetailsStyles";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { deleteBlog } from "../../utils/databaseFunctions";
 
 const CardItemDetails = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const { currentUser } = useSelector((state) => state.auth);
-  const { whoCreated, title, date, img, description } = state;
+  const { whoCreated, title, date, img, description, id } = state;
 
   return (
     <div style={cardItemDetailsContainer}>
@@ -90,6 +91,10 @@ const CardItemDetails = () => {
                 variant="contained"
                 endIcon={<DeleteSweepIcon />}
                 color="error"
+                onClick={() => {
+                  deleteBlog(id);
+                  navigate("/");
+                }}
                 fullWidth
               >
                 DELETE

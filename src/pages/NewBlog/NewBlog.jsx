@@ -1,7 +1,8 @@
 import React from "react";
 import Blog from "../../components/Blog/Blog";
+import { createBlogToFirebase } from "../../utils/databaseFunctions";
 const initialValuesOfNewBlog = {
-  id: Date.now(),
+  // id: Date.now(),
   title: "",
   date: "",
   img: "",
@@ -15,7 +16,10 @@ const NewBlog = () => {
   return (
     <div>
       <h1>New Blog</h1>
-      <Blog state={initialValuesOfNewBlog} />
+      <Blog
+        state={initialValuesOfNewBlog}
+        stateFunction={createBlogToFirebase}
+      />
     </div>
   );
 };
