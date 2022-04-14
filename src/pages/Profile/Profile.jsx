@@ -14,33 +14,55 @@ import { profileContainer } from "./profileStyles";
 
 const Profile = () => {
   const { currentUser } = useSelector((state) => state.auth);
+
   return (
     <div style={profileContainer}>
       <Card
         sx={{
-          maxWidth: 345,
+          maxWidth: 400,
           borderRadius: "2rem",
-          boxShadow: "10px 10px black",
+          boxShadow:
+            "5px 5px 8px #1BA0F2, 10px 10px 8px #38BDF2, 15px 15px 8px #38D0F2",
+          margin: "4rem",
         }}
       >
         <CardActionArea
-          sx={{ display: "flex", flexDirection: "column", padding: "1rem" }}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            padding: "4rem 1rem",
+          }}
         >
           <Box>
-            <Avatar sx={{ bgcolor: deepOrange[500] }}>
-              {currentUser.displayName?.charAt(0)}
+            <Avatar
+              sx={{
+                bgcolor: deepOrange[500],
+                width: 100,
+                height: 100,
+                fontSize: "2rem",
+              }}
+            >
+              {(currentUser.displayName || currentUser.email)
+                .charAt(0)
+                .toUpperCase()}
             </Avatar>
           </Box>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="h1">
-              {currentUser.displayName ? "Display Name" : "Email"}
+            {currentUser.displayName && (
+              <>
+                <Typography gutterBottom variant="p" component="p">
+                  Display Name
+                </Typography>
+                <Typography gutterBottom variant="p" component="h1">
+                  {currentUser.displayName}
+                </Typography>
+              </>
+            )}
+            <Typography gutterBottom variant="p" component="p">
+              Email
             </Typography>
-            <Typography gutterBottom variant="h5" component="h1">
-              {currentUser.displayName}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
+            <Typography gutterBottom variant="p" component="h1">
+              {currentUser.email}
             </Typography>
           </CardContent>
         </CardActionArea>

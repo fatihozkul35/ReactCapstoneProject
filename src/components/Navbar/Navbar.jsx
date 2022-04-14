@@ -74,7 +74,8 @@ const Navbar = () => {
               color: "#19402E",
             }}
           >
-            Welcome to our website {currentUser.displayName}
+            Welcome to our website{" "}
+            {currentUser.displayName || currentUser.email}
           </Typography>
 
           <div>

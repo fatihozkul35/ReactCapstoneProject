@@ -7,8 +7,9 @@ export const navbar = {
   padding: "0 30px",
   backgroundColor: "#04D0F5",
   height: "8rem",
-  borderBottom: "5px solid black",
+  borderBottom: "2px solid #38D0F2",
   fontSize: "2rem",
+  boxShadow: "0 0px 25px 8px #38D0F2",
 };
 
 export const MenuItemHover = styled.div`

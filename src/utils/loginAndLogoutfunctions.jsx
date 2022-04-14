@@ -39,7 +39,8 @@ export const registerWithEmailPassword = (email, password, dispatch) => {
     .then((userCredential) => {
       // Signed in
       const currentUser = userCredential.user;
-      currentUser.displayName = email;
+
+      // currentUser.displayName = email;
       dispatch(authLogin(currentUser));
     })
     .catch((error) => {
@@ -60,7 +61,7 @@ export const logInWithEmailAndPassword = (
     .then((userCredential) => {
       // Signed in
       const currentUser = userCredential.user;
-      currentUser.displayName = email;
+      // currentUser.displayName = email;
       dispatch(authLogin(currentUser));
       navigate("/");
     })

@@ -18,7 +18,11 @@ const Main = () => {
 
   return (
     <Box>
-      <Typography variant="h3" component="h1" sx={{ my: 5 }}>
+      <Typography
+        variant="h3"
+        component="h1"
+        sx={{ py: 5, fontFamily: "inherit" }}
+      >
         -----DASHBOARD-----
       </Typography>
       <Grid

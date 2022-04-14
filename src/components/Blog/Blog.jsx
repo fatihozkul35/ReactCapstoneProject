@@ -1,4 +1,12 @@
-import { Box, Button, Grid, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardMedia,
+  Grid,
+  TextareaAutosize,
+  TextField,
+} from "@mui/material";
 import React, { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import { registerFormContainer } from "../RegisterForm/registerFormStyles";
@@ -36,7 +44,6 @@ const Blog = ({ state, stateFunction }) => {
 
   return (
     <div>
-      <h1>New Blog</h1>
       <Box
         component="form"
         style={registerFormContainer}
@@ -44,14 +51,14 @@ const Blog = ({ state, stateFunction }) => {
         // noValidate
         // autoComplete="off"
       >
-        <Grid container style={{ width: "50%" }} spacing={4}>
+        <Grid container style={{ width: 400 }} spacing={2}>
           <Grid item xs={12}>
             <TextField
               id="title"
               name="title"
               label="Title"
               type="text"
-              variant="filled"
+              variant="standard"
               value={blogForm.title}
               // onChange={handleChange}
               // onBlur={handleBlur}
@@ -69,7 +76,7 @@ const Blog = ({ state, stateFunction }) => {
               name="img"
               label="Image URL"
               type="url"
-              variant="filled"
+              variant="standard"
               value={blogForm.img}
               // onChange={handleChange}
               // onBlur={handleBlur}
@@ -81,13 +88,19 @@ const Blog = ({ state, stateFunction }) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField
+            <TextareaAutosize
+              aria-label="empty textarea"
+              placeholder="Content"
+              minRows={5}
+              style={{ width: 200, padding: "10px 0 0 10px" }}
+            />
+            {/* <TextField
               // id="filled-search"
               id="description"
               name="description"
               label="Content"
               type="text"
-              variant="filled"
+              variant="standard"
               value={blogForm.description}
               // onChange={handleChange}
               // onBlur={handleBlur}
@@ -96,7 +109,7 @@ const Blog = ({ state, stateFunction }) => {
               onChange={changeBlog}
               fullWidth
               required
-            />
+            /> */}
           </Grid>
           <Grid item xs={12}>
             <Button

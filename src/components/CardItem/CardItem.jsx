@@ -16,6 +16,7 @@ import {
   blogAddComment,
   blogAddToFavorite,
 } from "../../utils/favChatFunctions";
+import { cardStyle } from "./cardItemStyles";
 
 const CardItem = (prop) => {
   const {
@@ -36,7 +37,7 @@ const CardItem = (prop) => {
 
   return (
     <div>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card style={cardStyle} sx={{ maxWidth: 345 }}>
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
