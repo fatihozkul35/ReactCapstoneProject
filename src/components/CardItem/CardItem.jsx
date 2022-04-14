@@ -12,28 +12,27 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import { CardActionArea } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
-// const blogs = [
-//   {
-//     title: "Shrimp and Chorizo Paella",
-//     date: "September 14, 2016",
-//     img: "https://cdn.pixabay.com/photo/2022/01/22/16/26/lake-6957802_960_720.jpg",
-//     description:
-//       "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
-//   },
-//   {
-//     title: "Shrimp and Chorizo Paella",
-//     date: "September 14, 2016",
-//     img: "https://cdn.pixabay.com/photo/2022/01/22/16/26/lake-6957802_960_720.jpg",
-//     description:
-//       "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
-//   },
-// ];
+import {
+  blogAddComment,
+  blogAddToFavorite,
+} from "../../utils/favChatFunctions";
 
 const CardItem = (prop) => {
-  const { id, title, date, img, description, whoCreated } = prop.blog;
+  const {
+    id,
+    title,
+    date,
+    img,
+    description,
+    whoCreated,
+    likedCounter,
+    commentedCounter,
+    whoLiked,
+  } = prop.blog;
+
   const navigate = useNavigate();
-  // const { currentUser } = useSelector((state) => state.auth);
+  const { blogs } = useSelector((state) => state.blogs);
+  const { currentUser } = useSelector((state) => state.auth);
 
   return (
     <div>
@@ -63,12 +62,22 @@ const CardItem = (prop) => {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
+          <IconButton
+            aria-label="add to favorites"
+            onClick={() => blogAddToFavorite(prop.blog, currentUser)}
+          >
+            <FavoriteIcon
+              sx={{ color: whoLiked.includes(`${currentUser.email}`) && "red" }}
+            />
           </IconButton>
-          <IconButton aria-label="share">
+          <span> {likedCounter}</span>
+          <IconButton
+            aria-label="share"
+            onClick={() => blogAddComment(id, blogs, currentUser)}
+          >
             <ChatBubbleOutlineIcon />
           </IconButton>
+          <span> {commentedCounter}</span>
         </CardActions>
       </Card>
     </div>

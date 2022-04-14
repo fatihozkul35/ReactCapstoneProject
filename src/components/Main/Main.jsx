@@ -1,14 +1,20 @@
 import { Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import { getblogsFromFirebase } from "../../utils/databaseFunctions";
+import { useDispatch, useSelector } from "react-redux";
+import { getblogsFromFirebase } from "../../redux/thunk/blogsThunk";
+// import { getblogsFromFirebase } from "../../utils/databaseFunctions";
 import CardItem from "../CardItem/CardItem";
 
 const Main = () => {
-  const [blogs, setBlogs] = useState([]);
+  const { blogs } = useSelector((state) => state.blogs);
+
+  // const [blogsUi, setBlogsUi] = useState([]);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    getblogsFromFirebase(setBlogs);
-  }, []);
+    getblogsFromFirebase(dispatch);
+  }, [dispatch]);
 
   return (
     <Box>

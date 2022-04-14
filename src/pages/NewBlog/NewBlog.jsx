@@ -1,16 +1,16 @@
 import React from "react";
 import Blog from "../../components/Blog/Blog";
 import { createBlogToFirebase } from "../../utils/databaseFunctions";
-const initialValuesOfNewBlog = {
-  // id: Date.now(),
+export const initialValuesOfNewBlog = {
   title: "",
   date: "",
   img: "",
   description: "",
   whoCreated: "",
-  whoLiked: ["a", "b", "c"],
+  whoLiked: [""],
   likedCounter: 0,
-  whoCommented: ["a", "b", "c"],
+  whoCommented: [""],
+  commentedCounter: 0,
 };
 const NewBlog = () => {
   return (

@@ -17,20 +17,20 @@ export const createBlogToFirebase = (blog) => {
 };
 
 //! This function fetch blogs from firebase
-export const getblogsFromFirebase = (setBlogs) => {
-  const db = getDatabase();
-  const starCountRef = ref(db, "blogs/");
-  onValue(starCountRef, (snapshot) => {
-    const data = snapshot.val();
-    if (data) {
-      const arrayData = Object.values(data);
-      setBlogs([...arrayData]);
-    } else {
-      setBlogs([]);
-    }
-    // console.log(arrayData);
-  });
-};
+// export const getblogsFromFirebase = (setBlogs) => {
+//   const db = getDatabase();
+//   const starCountRef = ref(db, "blogs/");
+//   onValue(starCountRef, (snapshot) => {
+//     const data = snapshot.val();
+//     if (data) {
+//       const arrayData = Object.values(data);
+//       setBlogs([...arrayData]);
+//     } else {
+//       setBlogs([]);
+//     }
+//     // console.log(arrayData);
+//   });
+// };
 // !! This function updates blogs to firebase
 export const updateBlogToFirebase = (blog) => {
   const db = getDatabase();

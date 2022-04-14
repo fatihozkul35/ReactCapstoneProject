@@ -38,13 +38,12 @@ export const registerWithEmailPassword = (email, password, dispatch) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
-      console.log("register");
-
       const currentUser = userCredential.user;
       currentUser.displayName = email;
       dispatch(authLogin(currentUser));
     })
     .catch((error) => {
+      console.log("register");
       const errorCode = error.code;
       const errorMessage = error.message;
       alert(errorCode, errorMessage);

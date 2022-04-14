@@ -4,6 +4,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { registerFormContainer } from "../RegisterForm/registerFormStyles";
 import { createBlogToFirebase } from "../../utils/databaseFunctions";
 import { useSelector } from "react-redux";
+import { initialValuesOfNewBlog } from "../../pages/NewBlog/NewBlog";
 
 const Blog = ({ state, stateFunction }) => {
   const [blogForm, setBlogForm] = useState(state);
@@ -26,21 +27,11 @@ const Blog = ({ state, stateFunction }) => {
     const whoCreated = currentUser.email;
     const newBlog = {
       ...blogForm,
-      // id: id,
       whoCreated: whoCreated,
       date: date,
     };
     stateFunction(newBlog);
-    setBlogForm({
-      title: "",
-      date: "",
-      img: "",
-      description: "",
-      whoCreated: "",
-      whoLiked: ["a", "b", "c"],
-      likedCounter: 0,
-      whoCommented: ["a", "b", "c"],
-    });
+    setBlogForm(initialValuesOfNewBlog);
   };
 
   return (
