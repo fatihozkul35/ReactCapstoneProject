@@ -17,40 +17,22 @@ import { logOut } from "../../utils/loginAndLogoutfunctions";
 import { MenuItemHover, navbar } from "./navbarStyles";
 
 const Navbar = () => {
-  // const [auth, setAuth] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { currentUser } = useSelector((state) => state.auth);
   const [anchorEl, setAnchorEl] = useState();
-  // (React.useState < null) | (HTMLElement > null);
 
-  // const handleChange = (e) => {
-  //   setAuth(e.target.checked);
-  // };
   const handleMenu = (e) => {
     setAnchorEl(e.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
-    // useNavigate("/login");
   };
 
   return (
     <Box style={navbar} sx={{ flexGrow: 1 }}>
-      {/* <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={auth}
-              onChange={handleChange}
-              aria-label="login switch"
-            />
-          }
-          label={auth ? "Logout" : "Login"}
-        />
-      </FormGroup> */}
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -61,7 +43,6 @@ const Navbar = () => {
             sx={{ mr: 2 }}
             onClick={() => navigate("/")}
           >
-            {/* <MenuIcon /> */}
             <FaRegHandPeace />
           </IconButton>
           <Typography

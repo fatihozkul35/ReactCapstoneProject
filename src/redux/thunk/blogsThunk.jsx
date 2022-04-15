@@ -1,14 +1,10 @@
 import { getDatabase, onValue, ref, set } from "firebase/database";
 import { setBlogs } from "../actions/blogsAction";
-
-// export const createBlogToFirebase = (dispatch,blog) => {
-//   const id = Date.now();
-//   const db = getDatabase();
-//   set(ref(db, "blogs/" + id), { ...blog, id: id });
-// };
+import { setLoadingFalse, setLoadingTrue } from "../actions/loadingActions";
 
 //! This function fetch blogs from firebase
 export const getblogsFromFirebase = (dispatch) => {
+  dispatch(setLoadingTrue());
   const db = getDatabase();
   const starCountRef = ref(db, "blogs/");
   onValue(starCountRef, (snapshot) => {
@@ -16,7 +12,7 @@ export const getblogsFromFirebase = (dispatch) => {
     if (data) {
       const arrayData = Object.values(data);
       dispatch(setBlogs(arrayData));
-      //   setBlogs([...arrayData]);
+      dispatch(setLoadingFalse());
     }
   });
 };
