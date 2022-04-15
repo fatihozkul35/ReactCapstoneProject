@@ -17,6 +17,8 @@ import {
   blogAddToFavorite,
 } from "../../utils/favChatFunctions";
 import { cardStyle } from "./cardItemStyles";
+import { toastifyWarn } from "../../utils/toastifyFunction";
+import { ToastContainer } from "react-toastify";
 
 const CardItem = (prop) => {
   const {
@@ -48,7 +50,11 @@ const CardItem = (prop) => {
           subheader={date}
         />
         <CardActionArea
-          onClick={() => navigate(`/${id}`, { state: prop.blog })}
+          onClick={() =>
+            currentUser
+              ? navigate(`/${id}`, { state: prop.blog })
+              : toastifyWarn("You must login for blog details...")
+          }
         >
           <CardMedia
             component="img"
@@ -57,6 +63,17 @@ const CardItem = (prop) => {
             alt="Paella dish"
           />
         </CardActionArea>
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
             {description}
@@ -65,9 +82,10 @@ const CardItem = (prop) => {
         <CardActions disableSpacing>
           <IconButton
             aria-label="add to favorites"
-            onClick={
-              () =>
-                currentUser ? blogAddToFavorite(prop.blog, currentUser) : null //!burada toastify benzeri kullan
+            onClick={() =>
+              currentUser
+                ? blogAddToFavorite(prop.blog, currentUser)
+                : toastifyWarn("You must be logged in to add to favourites...")
             }
           >
             <FavoriteIcon

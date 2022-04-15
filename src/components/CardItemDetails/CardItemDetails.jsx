@@ -22,12 +22,23 @@ import { cardItemDetailsContainer } from "./cardItemDetailsStyles";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteBlog } from "../../utils/databaseFunctions";
+import { blogAddToFavorite } from "../../utils/favChatFunctions";
 
 const CardItemDetails = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const { currentUser } = useSelector((state) => state.auth);
-  const { whoCreated, title, date, img, description, id } = state;
+  const {
+    whoCreated,
+    title,
+    date,
+    img,
+    description,
+    id,
+    likedCounter,
+    commentedCounter,
+    whoLiked,
+  } = state;
 
   return (
     <div style={cardItemDetailsContainer}>
@@ -63,11 +74,15 @@ const CardItemDetails = () => {
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
+            <FavoriteIcon
+              sx={{ color: whoLiked.includes(`${currentUser.email}`) && "red" }}
+            />
           </IconButton>
+          <span> {likedCounter}</span>
           <IconButton aria-label="share">
             <ChatBubbleOutlineIcon />
           </IconButton>
+          <span> {commentedCounter}</span>
         </CardActions>
         {currentUser.email === whoCreated && (
           <CardActions

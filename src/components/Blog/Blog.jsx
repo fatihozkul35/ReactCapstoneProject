@@ -1,18 +1,10 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardMedia,
-  Grid,
-  TextareaAutosize,
-  TextField,
-} from "@mui/material";
+import { Box, Button, Grid, TextareaAutosize, TextField } from "@mui/material";
 import React, { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import { registerFormContainer } from "../RegisterForm/registerFormStyles";
-import { createBlogToFirebase } from "../../utils/databaseFunctions";
 import { useSelector } from "react-redux";
 import { initialValuesOfNewBlog } from "../../pages/NewBlog/NewBlog";
+import { toastifySuccess } from "../../utils/toastifyFunction";
 
 const Blog = ({ state, stateFunction }) => {
   const [blogForm, setBlogForm] = useState(state);
@@ -24,7 +16,6 @@ const Blog = ({ state, stateFunction }) => {
 
   const newBlogsubmitToFirebase = (e) => {
     e.preventDefault();
-    // const id = Date.now();
 
     const dat = new Date();
     const date = [
@@ -40,6 +31,7 @@ const Blog = ({ state, stateFunction }) => {
     };
     stateFunction(newBlog);
     setBlogForm(initialValuesOfNewBlog);
+    toastifySuccess("Your blog has been successfully added...");
   };
 
   return (
@@ -48,8 +40,6 @@ const Blog = ({ state, stateFunction }) => {
         component="form"
         style={registerFormContainer}
         onSubmit={newBlogsubmitToFirebase}
-        // noValidate
-        // autoComplete="off"
       >
         <Grid container style={{ width: 400 }} spacing={2}>
           <Grid item xs={12}>
@@ -60,10 +50,6 @@ const Blog = ({ state, stateFunction }) => {
               type="text"
               variant="standard"
               value={blogForm.title}
-              // onChange={handleChange}
-              // onBlur={handleBlur}
-              // helperText={touched.email && errors.email}
-              // error={touched.email && Boolean(errors.email)}
               fullWidth
               onChange={changeBlog}
               required
@@ -78,10 +64,6 @@ const Blog = ({ state, stateFunction }) => {
               type="url"
               variant="standard"
               value={blogForm.img}
-              // onChange={handleChange}
-              // onBlur={handleBlur}
-              // helperText={touched.password && errors.password}
-              // error={touched.password && Boolean(errors.password)}
               onChange={changeBlog}
               fullWidth
               required
@@ -89,27 +71,15 @@ const Blog = ({ state, stateFunction }) => {
           </Grid>
           <Grid item xs={12}>
             <TextareaAutosize
-              aria-label="empty textarea"
-              placeholder="Content"
-              minRows={5}
-              style={{ width: 200, padding: "10px 0 0 10px" }}
-            />
-            {/* <TextField
-              // id="filled-search"
               id="description"
               name="description"
-              label="Content"
-              type="text"
-              variant="standard"
-              value={blogForm.description}
-              // onChange={handleChange}
-              // onBlur={handleBlur}
-              // helperText={touched.password && errors.password}
-              // error={touched.password && Boolean(errors.password)}
+              aria-label="empty textarea"
+              placeholder="Content"
+              maxRows={5}
+              style={{ width: 200, padding: "10px 0 0 10px" }}
               onChange={changeBlog}
-              fullWidth
-              required
-            /> */}
+              value={blogForm.description}
+            />
           </Grid>
           <Grid item xs={12}>
             <Button

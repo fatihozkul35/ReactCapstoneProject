@@ -9,6 +9,7 @@ import { logInWithEmailAndPassword } from "../../utils/loginAndLogoutfunctions";
 import { cardContainerStyle } from "./loginStyles";
 import AlternateEmailTwoToneIcon from "@mui/icons-material/AlternateEmailTwoTone";
 import VpnKeyTwoToneIcon from "@mui/icons-material/VpnKeyTwoTone";
+import { ToastContainer } from "react-toastify";
 
 const initialValuesOfForm = { email: "", password: "" };
 const Login = () => {

@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import { auth, provider } from "../auth/firebase";
 import { authLogin, authLogout } from "../redux/actions/authActions";
+import { toastifyError, toastifySuccess } from "./toastifyFunction";
 
 //! LOGIN AND LOGOUT FUNCTIONS
 export const logInWithGoogle = (dispatch, navigate) => {
@@ -19,33 +20,28 @@ export const logInWithGoogle = (dispatch, navigate) => {
       const currentUser = result.user;
       dispatch(authLogin(currentUser));
       navigate("/");
+      toastifySuccess("You have successfully logged in...");
     })
     .catch((error) => {
       // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
-      alert(errorCode, errorMessage);
       // The email of the user's account used.
       const email = error.email;
-      alert(email);
-      // The AuthCredential type that was used.
-      // const credential = GoogleAuthProvider.credentialFromError(error);
-      // ...
+      toastifyError(errorCode || errorMessage || email);
     });
 };
 
 export const registerWithEmailPassword = (email, password) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      // Signed in
       const currentUser = userCredential.user;
-      // dispatch(authLogin(currentUser));
+      toastifySuccess("You have successfully registered...");
     })
     .catch((error) => {
-      console.log("register");
       const errorCode = error.code;
       const errorMessage = error.message;
-      alert(errorCode, errorMessage);
+      toastifyError(errorCode || errorMessage);
     });
 };
 
@@ -62,11 +58,12 @@ export const logInWithEmailAndPassword = (
       // currentUser.displayName = email;
       dispatch(authLogin(currentUser));
       navigate("/");
+      toastifySuccess("You have successfully logged in...");
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      alert(errorCode || errorMessage);
+      toastifyError(errorCode || errorMessage);
     });
 };
 
@@ -76,9 +73,10 @@ export const logOut = (dispatch, navigate) => {
       // Sign-out successful.
       dispatch(authLogout());
       navigate("/");
+      toastifySuccess("You have successfully logged out...");
     })
     .catch((error) => {
       // An error happened.
-      alert(error);
+      toastifyError(error);
     });
 };

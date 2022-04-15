@@ -9,21 +9,12 @@ import { Link } from "react-router-dom";
 const RegisterForm = (props) => {
   const { values, handleChange, handleBlur, touched, errors } = props;
 
-  // const [state, setState] = React.useState({
-  //   open: false,
-  //   vertical: "top",
-  //   horizontal: "center",
-  // });
-  // const { vertical, horizontal, open } = state;
-  // const handleClick = (newState) => () => {
-  //   setState({ open: true, ...newState });
-  // };
-
   const dispatch = useDispatch();
 
   const handleSubmitRegister = (e) => {
     e.preventDefault();
     registerWithEmailPassword(values.email, values.password, dispatch);
+    e.target.reset();
   };
   return (
     <Form
