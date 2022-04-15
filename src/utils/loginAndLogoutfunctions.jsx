@@ -34,14 +34,12 @@ export const logInWithGoogle = (dispatch, navigate) => {
     });
 };
 
-export const registerWithEmailPassword = (email, password, dispatch) => {
+export const registerWithEmailPassword = (email, password) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const currentUser = userCredential.user;
-
-      // currentUser.displayName = email;
-      dispatch(authLogin(currentUser));
+      // dispatch(authLogin(currentUser));
     })
     .catch((error) => {
       console.log("register");

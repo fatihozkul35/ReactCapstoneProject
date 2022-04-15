@@ -65,7 +65,10 @@ const CardItem = (prop) => {
         <CardActions disableSpacing>
           <IconButton
             aria-label="add to favorites"
-            onClick={() => blogAddToFavorite(prop.blog, currentUser)}
+            onClick={
+              () =>
+                currentUser ? blogAddToFavorite(prop.blog, currentUser) : null //!burada toastify benzeri kullan
+            }
           >
             <FavoriteIcon
               sx={{ color: whoLiked.includes(`${currentUser.email}`) && "red" }}
