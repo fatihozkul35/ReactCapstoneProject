@@ -22,7 +22,7 @@ import { cardItemDetailsContainer } from "./cardItemDetailsStyles";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteBlog } from "../../utils/databaseFunctions";
-import { blogAddToFavorite } from "../../utils/favChatFunctions";
+
 
 const CardItemDetails = () => {
   const navigate = useNavigate();

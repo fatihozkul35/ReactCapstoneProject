@@ -12,6 +12,7 @@ const Home = () => {
     getblogsFromFirebase(dispatch);
   }, [dispatch]);
   const { loading } = useSelector((state) => state.loading);
+
   return <div style={homeStyles}>{loading ? <Loading /> : <Main />}</div>;
 };
 

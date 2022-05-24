@@ -35,7 +35,6 @@ export const logInWithGoogle = (dispatch, navigate) => {
 export const registerWithEmailPassword = (email, password) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      const currentUser = userCredential.user;
       toastifySuccess("You have successfully registered...");
     })
     .catch((error) => {

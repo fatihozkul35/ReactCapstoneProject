@@ -1,4 +1,4 @@
-import { Button, Grid, Snackbar, TextField } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
 import React from "react";
 import { registerFormContainer } from "./registerFormStyles";
 import SendIcon from "@mui/icons-material/Send";
